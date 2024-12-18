@@ -89,17 +89,23 @@ def gua2num(gua):
 
 
 def jie_gua(gua):
+    # print(gua)
     shang_gua = gua[0:3]
     xia_gua = gua[3:6]
+    # print('上卦：', gua2num(shang_gua))
+    # print('下卦：', gua2num(xia_gua))
+    print('\n')
     shang_gua_name = gua2num(shang_gua)
     xia_gua_name = gua2num(xia_gua)
     gua_64_name = shang_gua_name + xia_gua_name
+    print_name = '上' + shang_gua_name + '下' + xia_gua_name
+
     assert isinstance(json_file, str) and json_file, "json_file 必须是字符串且不能为空"
     assert os.path.isfile(json_file), f"文件 {json_file} 不存在"
     with open(json_file, 'r', encoding='utf8') as fp:
         gua_data_map = json.load(fp)
-    gua_data = gua_data_map[gua_64_name]
-    print("你摇的卦为:", gua_data['name'])
+        gua_data = gua_data_map[gua_64_name]
+    print("你摇的卦为:", print_name, gua_data['name'])
     print("解读:", gua_data['explain'])
 
 
@@ -118,7 +124,7 @@ print('\n')
 print('解卦须知：卦象中，上上卦、中中卦等仅代表发展趋势，不代表目前的实际状况。例如“泰”卦为大吉之兆，但是它只是中中卦。')
 time.sleep(1)
 if ben_gua_result == bian_gua_result:
-    print('本卦与变卦相同，只需查看本卦即可。\n')
+    print('\n这次本卦与变卦相同，只需查看本卦即可。\n')
     input('按回车键查看卦象：')
     jie_gua(ben_gua_result)
 else:
